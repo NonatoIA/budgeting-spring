@@ -1,0 +1,43 @@
+### Exemplos de requisições (abra no IntelliJ ou no VS Code com a extensão REST Client)
+
+### Criar transação pelo REST (amount em centavos: 3550 = R$ 35,50)
+POST http://localhost:8080/transactions
+Content-Type: application/json
+
+{
+  "description": "Compras no mercado",
+  "category": "GROCERIES",
+  "amount": 3550
+}
+
+### Validação: valor zero é rejeitado com 400
+POST http://localhost:8080/transactions
+Content-Type: application/json
+
+{
+  "description": "Teste",
+  "category": "GROCERIES",
+  "amount": 0
+}
+
+### Listar por categoria (valores em reais)
+GET http://localhost:8080/transactions/GROCERIES
+
+### Resumo de gastos por categoria (nova consulta)
+GET http://localhost:8080/transactions/summary
+
+### IA com texto: registrar gasto (precisa de OPENAI_API_KEY)
+POST http://localhost:8080/transactions/ai/text
+Content-Type: application/json
+
+{
+  "message": "Gastei 42 reais e 90 centavos em uma pizza ontem à noite"
+}
+
+### IA com texto: consultar resumo
+POST http://localhost:8080/transactions/ai/text
+Content-Type: application/json
+
+{
+  "message": "Em qual categoria eu gastei mais até agora?"
+}
